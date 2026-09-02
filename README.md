@@ -50,5 +50,3 @@ Work through these and make sure your code does the right thing:
 4. Trader pulls the quote while your order is unacknowledged.
 5. Your cancel is rejected because the order just got filled.
 6. An acknowledgement arrives for an order you already gave up on.
-
-Case 2 is the actual question. The rest are the follow-ups.

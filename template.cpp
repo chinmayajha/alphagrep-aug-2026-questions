@@ -1,4 +1,4 @@
-// Practice skeleton. Fill in the TODOs until the asserts in main() pass.
+// Skeleton. Fill in the TODOs until main() passes.
 // Build: g++ -std=c++17 -o template template.cpp && ./template
 
 #include <cassert>
@@ -52,8 +52,7 @@ class OrderManager {
   State state() const { return state_; }
 
  private:
-  // Called after every event: make the exchange match what the trader wants,
-  // if the current state allows you to send anything at all.
+  // Called after every event below.
   void reconcile() {
     // TODO
   }
@@ -106,7 +105,7 @@ struct Mock : Exchange {
 };
 
 int main() {
-  {  // requote three times while pending: one cancel, then the LATEST quote
+  {  // requote three times while the first order is still pending
     Mock ex;
     OrderManager oms(ex);
     oms.onQuote(Side::Buy, 100, 10);
@@ -119,7 +118,7 @@ int main() {
     oms.onCancelAck(1, true);
     assert(ex.news == 2 && ex.lastPx == 102 && ex.lastQty == 20);
   }
-  {  // identical requote costs nothing; stale ack is ignored
+  {  // re-quote after an ack, then a stale ack arrives
     Mock ex;
     OrderManager oms(ex);
     oms.onQuote(Side::Buy, 100, 10);
