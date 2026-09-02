@@ -11,6 +11,8 @@
 #include <random>
 #include <vector>
 
+// memo: cache indexed by n, shared across calls -- see main() for how it's seeded
+// and what the sentinel value means.
 double recursive(int n, std::vector<double>& memo) {
   (void)n; (void)memo;
   return 0.0;  // TODO: recursion + memo
@@ -56,6 +58,8 @@ double simulate(int n, int trials, unsigned seed = 42) {
 static bool near(double a, double b, double eps = 1e-12) { return std::fabs(a - b) < eps; }
 
 int main() {
+  // memo[i] should end up holding recursive(i, memo). -1.0 marks "not computed
+  // yet" -- every real answer here is a probability, so it's always >= 0.
   std::vector<double> memo(64, -1.0);
 
   assert(near(bottomUp(0), 1.0));

@@ -9,13 +9,13 @@
 #include <memory>
 #include <vector>
 
-int g_dtors = 0;
+int g_dtors = 0;  // test scaffolding, counts destructor calls below -- leave it alone
 
 // TODO: this is the class you were given, empty. Make it an interface.
 class Connector {
  public:
  protected:
-  bool connected_ = false;
+  bool connected_ = false;  // backing field for an accessor you add; set it in connect()/disconnect()
 };
 
 class BinanceConnector /* TODO: inherit */ {
@@ -25,7 +25,7 @@ class BinanceConnector /* TODO: inherit */ {
   // TODO: connect(), disconnect(), name()
 
  private:
-  int streamId_ = 7;   // state the base class knows nothing about
+  int streamId_ = 7;   // state the base class knows nothing about; decorative, no test reads it
 };
 
 class OtherExchangeConnector /* TODO: inherit */ {
@@ -35,7 +35,7 @@ class OtherExchangeConnector /* TODO: inherit */ {
   // TODO: same three methods, different behaviour
 
  private:
-  long seqNum_ = 0;
+  long seqNum_ = 0;   // same idea as streamId_ above: decorative, no test reads it
 };
 
 // TODO: one function that works for every connector. Think hard about the parameter

@@ -61,11 +61,13 @@ class OrderManager {
 
   void cancel() { /* TODO */ }
 
-  Exchange& ex_;
+  Exchange& ex_;                        // the exchange you call sendOrder()/cancelOrder() on
   std::optional<Quote> desired_;        // what the trader wants
   Quote sent_{Side::Buy, 0, 0};         // what the exchange has
-  State state_ = State::None;
-  long  id_ = 0, seq_ = 0, left_ = 0;
+  State state_ = State::None;           // update this yourself as the four handlers above fire
+  long id_   = 0;                       // id of the order currently in flight (0 = none)
+  long seq_  = 0;                       // bump this yourself to mint each new id_
+  long left_ = 0;                       // remaining unfilled quantity of the order in flight
 };
 
 // ------------------------------------------------------------------- strategy

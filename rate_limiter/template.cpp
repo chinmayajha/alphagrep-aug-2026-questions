@@ -22,10 +22,10 @@ class RateLimiter {
  private:
   static constexpr long kNever = -1000000000;  // older than any real timestamp
 
-  std::vector<long> ts_;
-  long              win_;
-  size_t            next_    = 0;
-  long              flagged_ = 0;
+  std::vector<long> ts_;              // fixed at maxOrders entries (see the ctor) -- don't resize it
+  long              win_;              // window length in ms, from the ctor
+  size_t            next_    = 0;      // an index into ts_; yours to manage inside allow()
+  long              flagged_ = 0;      // count of allow() calls that returned false
 };
 
 int main() {
